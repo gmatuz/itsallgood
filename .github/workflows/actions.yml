@@ -3,17 +3,13 @@
 name: CI
 
 on: [push, workflow_dispatch]
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: build rendertron
-      run: docker build -t render/tron .         
+jobs:    
   security:
-    needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: build rendertron
+        uses: actions/checkout@v2
+        run: docker build -t render/tron .    
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/docker@master
         env:
@@ -30,8 +26,10 @@ jobs:
         with:
           image-ref: render/tron
   version:
-    needs: build
-    runs-on: render/tron
-    steps:
-    - name: check chrome version
-      run: find . -name chrome -exec {} --version \;
+    runs-on: ubuntu-latest
+    - name: build rendertron
+        uses: actions/checkout@v2
+        run: |
+         docker build -t render/tron . 
+         docker run render/tron  find . -name chrome -exec {} --version \;   
+
