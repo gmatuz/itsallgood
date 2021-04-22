@@ -11,6 +11,7 @@ jobs:
     - name: build rendertron
       run: docker build -t render/tron .         
   security:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Run Snyk to check for vulnerabilities
@@ -29,6 +30,7 @@ jobs:
         with:
           image-ref: render/tron
   version:
+    needs: build
     runs-on: render/tron
     steps:
     - name: check chrome version
