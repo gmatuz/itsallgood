@@ -28,6 +28,8 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: render/tron
-
-
-
+  version:
+    runs-on: render/tron
+    steps:
+    - name: check chrome version
+      run: find . -name chrome -exec {} --version \;
