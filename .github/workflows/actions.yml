@@ -29,8 +29,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: build rendertron
-        uses: actions/checkout@v2
-        run: |
+      - uses: actions/checkout@v2
+      - run: |
           docker build -t render/tron . 
           docker run render/tron  find . -name chrome -exec {} --version \;   
 
