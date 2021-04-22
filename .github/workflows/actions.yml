@@ -27,7 +27,8 @@ jobs:
           image-ref: render/tron
   version:
     runs-on: ubuntu-latest
-    - name: build rendertron
+    steps:
+      - name: build rendertron
         uses: actions/checkout@v2
         run: |
          docker build -t render/tron . 
