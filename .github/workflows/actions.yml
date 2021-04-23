@@ -16,7 +16,6 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           image: render/tron 
-          args: --severity-threshold=high
       - name: Run anchore
         uses: anchore/scan-action@v2
         with:
